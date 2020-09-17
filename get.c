@@ -8,10 +8,17 @@ uint32_t getData(char * filename){
     uint32_t data;
 
     fp = fopen(filename, "r");
-    fread(&data, 1, 4, fp);
+    if(!fp){
+        printf("%s FILEOPEN ERROR!\n", filename);
+        exit(0);
+    }
+
+    if(fread(&data, 1, 4, fp) != 4){
+        printf("%s CAN'T READ 4 BYTES\n", filename);
+        exit(0);
+    }
     data = ntohl(data);
     
     fclose(fp);
-
     return data;
 }

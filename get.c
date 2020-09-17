@@ -5,15 +5,13 @@
 
 uint32_t getData(char * filename){
     FILE * fp;
-    uint32_t * pdata = malloc(sizeof(uint32_t));
     uint32_t data;
 
     fp = fopen(filename, "r");
-    fread(pdata, 4, 1, fp);
-    data = ntohl(*pdata);
+    fread(&data, 1, 4, fp);
+    data = ntohl(data);
     
     fclose(fp);
-    free(pdata);
 
     return data;
 }
